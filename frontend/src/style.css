@@ -1,0 +1,9 @@
+.form-container {
+    width: 15rem;
+}
+
+.form-level-errors {
+    width: 100%;
+    margin-top: .25rem;
+    color: #e74c3c;
+}
