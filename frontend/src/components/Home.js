@@ -37,7 +37,6 @@ export class Home extends Component {
             })
             .catch(exception => {
                 console.log('exception', exception);
-                console.log('exception.response', exception.response);
             });
 
         peer = new Peer(this.props.user.username);
@@ -123,14 +122,27 @@ export class Home extends Component {
         });
     };
 
+    toggleVideo = () => {
+        this.state.myStream.getTracks().forEach(track => {
+            if (track.kind === 'video') track.enabled = !track.enabled;
+        });
+    };
+
+    toggleAudio = () => {
+        this.state.myStream.getTracks().forEach(track => {
+            if (track.kind === 'audio') track.enabled = !track.enabled;
+        });
+    };
+
     render() {
         return (
             <>
                 <div className='container mx-auto mt-2'>
                     <div className='d-flex'>
                         <div className='mr-auto'>
-                            <Button>Contacts</Button>
+                            {/* <Button>Contacts</Button>
                             <Button className='ml-2'>Recent</Button>
+                             */}
                             <Button
                                 variant='danger'
                                 className='ml-2'
@@ -138,6 +150,12 @@ export class Home extends Component {
                                 onClick={() => { dataPeers[this.state.remoteUsername].close(); }}
                             >
                                 Hang
+                            </Button>
+                            <Button className='ml-2' onClick={this.toggleVideo}>
+                                Toggle Video
+                            </Button>
+                            <Button className='ml-2' onClick={this.toggleAudio}>
+                                Toggle Audio
                             </Button>
                         </div>
                         <div className='ml-auto'>
@@ -154,10 +172,10 @@ export class Home extends Component {
                 </div>
                 { !!this.state.myStream && (<div className='container videos-container'>
                     <div className='max-screen'>
-                        <Video mediaStream={this.state.myStream} />
+                        <Video mediaStream={this.state.remoteStream} />
                     </div>
                     <div className='min-screen'>
-                        <Video mediaStream={this.state.remoteStream} />
+                        <Video mediaStream={this.state.myStream} />
                     </div>
                 </div>)}
             </>
