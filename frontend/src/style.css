@@ -1,3 +1,8 @@
+html, body, #root {
+    height: 100%;
+    overflow: auto;
+}
+
 .form-container {
     width: 15rem;
 }
@@ -5,5 +10,35 @@
 .form-level-errors {
     width: 100%;
     margin-top: .25rem;
-    color: #e74c3c;
+    color: #d33682;
+}
+
+video {
+    transform: scaleX(-1);
+}
+
+.videos-container {
+    height: 75%;
+    width: 90%;
+    padding: 0;
+    margin: 0.75rem auto;
+    position: relative;
+}
+
+.max-screen, .min-screen {
+    background-color: #222;
+}
+
+.max-screen {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.min-screen {
+    width: 10rem;
+    height: 7rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
