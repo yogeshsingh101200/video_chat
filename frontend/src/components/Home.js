@@ -1,8 +1,12 @@
 import { Component } from 'react';
 import Video from './Video';
 import Call from './Call';
-import Button from 'react-bootstrap/Button';
 import Peer from 'peerjs';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import VideoToggleButton from './VideoToggleButton';
+import MicToggleButton from './MicToggleButton';
+import HangUpButton from './HangUpButton';
 
 var peer;
 const peers = {};
@@ -19,6 +23,8 @@ export class Home extends Component {
             remoteUsername: '',
             connected: false,
             busy: false,
+            video: true,
+            audio: true
         };
     }
 
@@ -124,60 +130,63 @@ export class Home extends Component {
 
     toggleVideo = () => {
         this.state.myStream.getTracks().forEach(track => {
-            if (track.kind === 'video') track.enabled = !track.enabled;
+            if (track.kind === 'video') {
+                track.enabled = !track.enabled;
+                this.setState(state => ({ video: !state.video }));
+            }
         });
     };
 
     toggleAudio = () => {
         this.state.myStream.getTracks().forEach(track => {
-            if (track.kind === 'audio') track.enabled = !track.enabled;
+            if (track.kind === 'audio') {
+                track.enabled = !track.enabled;
+                this.setState(state => ({ audio: !state.audio }));
+            }
         });
     };
 
     render() {
         return (
             <>
-                <div className='container mx-auto mt-2'>
-                    <div className='d-flex'>
-                        <div className='mr-auto'>
-                            {/* <Button>Contacts</Button>
-                            <Button className='ml-2'>Recent</Button>
-                             */}
-                            <Button
-                                variant='danger'
-                                className='ml-2'
-                                disabled={!this.state.busy}
-                                onClick={() => { dataPeers[this.state.remoteUsername].close(); }}
-                            >
-                                Hang
-                            </Button>
-                            <Button className='ml-2' onClick={this.toggleVideo}>
-                                Toggle Video
-                            </Button>
-                            <Button className='ml-2' onClick={this.toggleAudio}>
-                                Toggle Audio
-                            </Button>
-                        </div>
-                        <div className='ml-auto'>
-                            {this.state.connected && <Call
-                                disabled={this.state.busy}
-                                remoteUsername={this.state.remoteUsername}
-                                setRemoteUsername={username => this.setState({
-                                    remoteUsername: username
-                                })}
-                                makeCall={this.makeConnection}
-                            />}
-                        </div>
+                <div className='container mx-auto mt-2 h-75'>
+                    <div className='mx-auto'>
+                        {this.state.connected && <Call
+                            disabled={this.state.busy}
+                            remoteUsername={this.state.remoteUsername}
+                            setRemoteUsername={username => this.setState({
+                                remoteUsername: username
+                            })}
+                            makeCall={this.makeConnection}
+                        />}
                     </div>
+                    {!!this.state.myStream && (<div className='container videos-container'>
+                        <div className='max-screen'>
+                            <Video mediaStream={this.state.remoteStream} />
+                        </div>
+                        <div className='min-screen'>
+                            <Video mediaStream={this.state.myStream} />
+                        </div>
+                    </div>)}
                 </div>
-                { !!this.state.myStream && (<div className='container videos-container'>
-                    <div className='max-screen'>
-                        <Video mediaStream={this.state.remoteStream} />
-                    </div>
-                    <div className='min-screen'>
-                        <Video mediaStream={this.state.myStream} />
-                    </div>
-                </div>)}
+                <Navbar bg="dark" variant="dark" fixed='bottom'>
+                    <Nav className="mx-auto">
+                        <MicToggleButton
+                            audio={this.state.audio}
+                            onClick={this.toggleAudio}
+                        />
+                        <div className='ml-3'></div>
+                        <VideoToggleButton
+                            video={this.state.video}
+                            onClick={this.toggleVideo}
+                        />
+                        <div className='ml-3'></div>
+                        <HangUpButton
+                            disabled={!this.state.busy}
+                            onClick={() => { dataPeers[this.state.remoteUsername].close(); }}
+                        />
+                    </Nav>
+                </Navbar>
             </>
         );
     }
