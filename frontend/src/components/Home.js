@@ -149,18 +149,18 @@ export class Home extends Component {
     render() {
         return (
             <>
-                <div className='container mx-auto mt-2 h-75'>
-                    <div className='mx-auto'>
-                        {this.state.connected && <Call
+                <div className='container d-flex flex-column'>
+                    {this.state.connected && <div className='mx-auto mt-2'>
+                        <Call
                             disabled={this.state.busy}
                             remoteUsername={this.state.remoteUsername}
                             setRemoteUsername={username => this.setState({
                                 remoteUsername: username
                             })}
                             makeCall={this.makeConnection}
-                        />}
-                    </div>
-                    {!!this.state.myStream && (<div className='container videos-container'>
+                        />
+                    </div>}
+                    {!!this.state.myStream && (<div className='videos-container flex-grow-1'>
                         <div className='max-screen'>
                             <Video mediaStream={this.state.remoteStream} />
                         </div>
@@ -169,7 +169,7 @@ export class Home extends Component {
                         </div>
                     </div>)}
                 </div>
-                <Navbar bg="dark" variant="dark" fixed='bottom'>
+                <Navbar bg="dark" variant="dark" fixed='sticky'>
                     <Nav className="mx-auto">
                         <MicToggleButton
                             audio={this.state.audio}

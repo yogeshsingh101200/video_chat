@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 export default function Call(props) {
     return (
         <div className='caller'>
-            <InputGroup className='mb-3'>
+            <InputGroup>
                 <FormControl
                     placeholder={`Recipient 's username`}
                     readOnly={props.disabled}
