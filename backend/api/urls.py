@@ -1,11 +1,12 @@
 from django.urls import include, path
 from rest_framework import routers
-from .views import UserViewSet
+from .views import UserViewSet, ContactViewSet
 from .views import RegisterAPI, LoginAPI, get_user
 from knox import views as knox_views
 
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'users', UserViewSet, 'users')
+router.register(r'auth/contacts', ContactViewSet, 'contacts')
 
 urlpatterns = [
     path('', include(router.urls)),

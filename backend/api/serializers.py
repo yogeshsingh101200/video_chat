@@ -1,5 +1,6 @@
+from django.db import models
 from django.db.models import fields
-from .models import User
+from .models import User, Contact
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 
@@ -32,3 +33,10 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return data
         raise serializers.ValidationError('Incorrect Credentials!')
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = '__all__'
+        read_only_fields = ['owner']
