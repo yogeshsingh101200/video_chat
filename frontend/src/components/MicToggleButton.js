@@ -4,7 +4,7 @@ export default function MicToggleButton(props) {
     if (props.audio) {
         return (
             <Button
-                variant='outline-secondary'
+                variant='outline-light'
                 className='icon-wrapper'
                 onClick={props.onClick}
             >
@@ -14,7 +14,7 @@ export default function MicToggleButton(props) {
     } else {
         return (
             <Button
-                variant='secondary'
+                variant='light'
                 className='icon-wrapper'
                 onClick={props.onClick}
             >

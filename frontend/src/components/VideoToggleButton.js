@@ -4,7 +4,7 @@ export default function VideoToggleButton(props) {
     if (props.video) {
         return (
             <Button
-                variant='outline-secondary'
+                variant='outline-light'
                 className='icon-wrapper'
                 onClick={props.onClick}
             >
@@ -14,7 +14,7 @@ export default function VideoToggleButton(props) {
     } else {
         return (
             <Button
-                variant='secondary'
+                variant='light'
                 className='icon-wrapper'
                 onClick={props.onClick}
             >
