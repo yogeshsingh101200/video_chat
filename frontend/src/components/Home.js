@@ -7,6 +7,8 @@ import Nav from 'react-bootstrap/Nav';
 import VideoToggleButton from './VideoToggleButton';
 import MicToggleButton from './MicToggleButton';
 import HangUpButton from './HangUpButton';
+import Button from 'react-bootstrap/Button';
+import Contact from './Contact';
 
 var peer;
 const peers = {};
@@ -24,7 +26,8 @@ export class Home extends Component {
             connected: false,
             busy: false,
             video: true,
-            audio: true
+            audio: true,
+            showContacts: false
         };
     }
 
@@ -150,7 +153,21 @@ export class Home extends Component {
         return (
             <>
                 <div className='container d-flex flex-column'>
-                    {this.state.connected && <div className='mx-auto mt-2'>
+                    {this.state.connected && <div className='mx-auto mt-2 d-flex'>
+                        <Button
+                            variant='info'
+                            className='mr-2'
+                            onClick={() => this.setState({ showContacts: true })}
+                        >
+                            Contacts
+                        </Button>
+                        <Contact
+                            show={this.state.showContacts}
+                            setRemoteUsername={username => this.setState({
+                                remoteUsername: username
+                            })}
+                            handleClose={() => this.setState({ showContacts: false })}
+                        />
                         <Call
                             disabled={this.state.busy}
                             remoteUsername={this.state.remoteUsername}

@@ -31,7 +31,7 @@ video {
 }
 
 .videos-container {
-    height: 75%;
+    height: 300px;
     width: 90%;
     padding: 0;
     margin: 0.5rem auto;
@@ -66,4 +66,8 @@ video {
 
 .pointer {
     cursor: pointer;
+}
+
+.modal-tab {
+    height: 15rem;
 }
