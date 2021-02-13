@@ -8,7 +8,7 @@ export default function HangUpButton(props) {
             onClick={props.onClick}
             disabled={props.disabled}
         >
-            <i className="bi bi-telephone-fill"></i>
+            <i className='bi bi-telephone-fill'></i>
         </Button>
     );
 }

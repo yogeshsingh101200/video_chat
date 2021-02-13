@@ -18,7 +18,7 @@ export default function VideoToggleButton(props) {
                 className='icon-wrapper'
                 onClick={props.onClick}
             >
-                <i className="bi bi-camera-video-off-fill"></i>
+                <i className='bi bi-camera-video-off-fill'></i>
             </Button>
         );
     }

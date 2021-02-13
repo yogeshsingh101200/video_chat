@@ -69,5 +69,16 @@ video {
 }
 
 .modal-tab {
-    height: 15rem;
+    height: 17rem;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.modal-tab::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.auto-complete-search {
+    width: 90%;
 }

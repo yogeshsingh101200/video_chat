@@ -18,7 +18,7 @@ export default function MicToggleButton(props) {
                 className='icon-wrapper'
                 onClick={props.onClick}
             >
-                <i className="bi bi-mic-mute-fill"></i>
+                <i className='bi bi-mic-mute-fill'></i>
             </Button>
         );
     }

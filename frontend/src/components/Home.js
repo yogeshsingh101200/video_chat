@@ -186,8 +186,8 @@ export class Home extends Component {
                         </div>
                     </div>)}
                 </div>
-                <Navbar bg="dark" variant="dark" fixed='sticky'>
-                    <Nav className="mx-auto">
+                <Navbar bg='dark' variant='dark' fixed='sticky'>
+                    <Nav className='mx-auto'>
                         <MicToggleButton
                             audio={this.state.audio}
                             onClick={this.toggleAudio}
