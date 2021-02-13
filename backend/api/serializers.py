@@ -40,3 +40,12 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = '__all__'
         read_only_fields = ['owner']
+
+    def validate(self, data):
+        owner = self.context['request'].user
+        if Contact.objects.filter(owner=owner, person=data.get('person')):
+            raise serializers.ValidationError('Contact already exists!')
+        elif Contact.objects.filter(owner=owner, contact_name=data.get('contact_name')):
+            raise serializers.ValidationError('Contact name taken!')
+
+        return data
