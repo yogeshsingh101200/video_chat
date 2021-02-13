@@ -33,6 +33,12 @@ const handleSubmit = (values, actions) => {
                 .post('/api/auth/contacts', body, config)
                 .then(res => {
                     console.log(res.data);
+                    actions.resetForm({
+                        values: {
+                            contact_name: '',
+                            person: ''
+                        },
+                    });
                 })
                 .catch(exception => {
                     if (exception.response && exception.response.status === 400) {
@@ -81,6 +87,7 @@ export default function AddContact() {
                                 type='text'
                                 name='contact_name'
                                 placeholder='Enter contact name'
+                                autoComplete='off'
                                 isValid={formik.touched.contact_name && !formik.errors.contact_name}
                                 isInvalid={formik.touched.contact_name && formik.errors.contact_name}
                                 value={formik.values.contact_name}
