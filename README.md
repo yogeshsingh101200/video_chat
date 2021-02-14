@@ -10,16 +10,16 @@ A peer to peer video chat web app.
 
 # How to run locally
 
-1. Setting up backend
+1. Open terminal in root folder then
 ```bash
 pip install -r requirements.txt
 cd backend
 python manage.py migrate
 python manage.py runserver 
 ```
-2. Setting up frontend
+2. Open a new terminal in root folder then
 ```bash
-cd ../frontend
+cd frontend
 npm install
 npm start
 ```
