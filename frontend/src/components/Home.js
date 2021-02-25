@@ -93,6 +93,7 @@ export class Home extends Component {
     }
 
     componentWillUnmount() {
+        peer.disconnect();
         const tracks = this.state.myStream.getTracks();
         tracks.forEach(track => track.stop());
     }
